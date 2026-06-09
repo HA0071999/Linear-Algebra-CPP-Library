@@ -6,15 +6,14 @@ class Matrix{
     public:
     int rows; int columns;
     vector<vector<double>> matrix; 
-    Matrix(){
-        cout << "Enter number of rows: ";
-        cin >> rows;
 
-        cout << "Enter number of columns: ";
-        cin >> columns;
-
+     Matrix(int row, int col){
+        rows=row;
+        columns=col;
+        cout<<rows<<"x"<<columns<<" matrix"<<endl;
         matrix.resize(rows, vector<double>(columns));
     }
+
     void inputMatrix(){
         for (int i =0 ; i< rows; i++) {
             for (int j=0; j<columns; j++){
@@ -62,7 +61,7 @@ class Matrix{
 };
 
 int main() {
-    Matrix m1;
+    Matrix m1(2,3);
     m1.inputMatrix();
     m1.displayMatrix();
     cout<<m1.determinant();
