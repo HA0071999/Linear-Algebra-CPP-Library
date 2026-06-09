@@ -21,6 +21,7 @@ class Matrix{
                 cin>>matrix[i][j];
             }
         }
+        displayMatrix();
     }
     void displayMatrix(){
         //simply showing how the matrix looks
@@ -57,13 +58,31 @@ class Matrix{
         }
         
     }
-
+    //matrix addition
+    Matrix operator+(const Matrix& other){
+        Matrix result(rows,columns);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                result.matrix[i][j] =
+                    matrix[i][j] +
+                    other.matrix[i][j];
+            }
+        }
+        return result;
+        //PROBLEM! WILL RETURN 0 IF NOT SQR MATRIX--> needs exception handelling
+    }
 };
 
 int main() {
-    Matrix m1(2,3);
+    Matrix m1(3,3);
     m1.inputMatrix();
-    m1.displayMatrix();
+   
     cout<<m1.determinant();
+    Matrix m2(3,3), m3(3,3);
+    m2.inputMatrix();
+    
+    m3 = m1+m2;
+    m3.displayMatrix();
+    
     return 0;
 }
