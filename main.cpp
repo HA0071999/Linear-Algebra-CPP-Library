@@ -54,9 +54,10 @@ class Matrix{
                 //if (2x2) matrix, ad - bc
                 return matrix[0][0]*matrix[1][1] - matrix[1][0]*matrix[0][1];
             }
-
+    
         }
-        
+        return 0;
+        //PROBLEM! WILL RETURN 0 IF NOT SQR MATRIX--> needs exception handelling
     }
     //matrix addition
     Matrix operator+(const Matrix& other){
@@ -69,7 +70,7 @@ class Matrix{
             }
         }
         return result;
-        //PROBLEM! WILL RETURN 0 IF NOT SQR MATRIX--> needs exception handelling
+        
     }
 };
 
