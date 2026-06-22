@@ -59,31 +59,70 @@ class Matrix{
         return 0;
         //PROBLEM! WILL RETURN 0 IF NOT SQR MATRIX--> needs exception handelling
     }
-    //matrix addition
-    Matrix operator+(const Matrix& other){
-        Matrix result(rows,columns);
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
+    //matrix addition, better to keep as non member friend func for symmetry
+    friend Matrix  operator+(const Matrix& o1, const Matrix& o2);
+    
+    //matrix multipliction of two matrices only
+    friend Matrix operator*(const Matrix& m1, const Matrix& m2);
+
+    //scalar multiplicatin- matrix*double
+    friend Matrix operator*(Matrix& m1, const double scalar);
+    //scalar multiplicatin- double*matrix
+    friend Matrix operator*(const double scalar, Matrix& m1);
+
+};
+
+
+//matrix addition
+Matrix operator+(const Matrix& o1, const Matrix& o2){
+        Matrix result(o1.rows, o1.columns); //will have same size as o1
+        for (int i = 0; i < o1.rows; i++) {
+            for (int j = 0; j < o1.columns; j++) {
                 result.matrix[i][j] =
-                    matrix[i][j] +
-                    other.matrix[i][j];
+                    o2.matrix[i][j] +
+                    o1.matrix[i][j];
             }
         }
         return result;
         
     }
-};
 
+//matrix multiplication
+Matrix operator*(const Matrix& m1, const Matrix& m2){
+    Matrix result(m1.rows, m2.columns); 
+        for (int i = 0; i < m1.rows; i++) {
+            for (int j = 0; j < m2.columns; j++) {
+                result.matrix[i][j] = 0;
+
+                for (int k = 0; k < m1.columns; k++) {
+                    result.matrix[i][j] +=
+                        m1.matrix[i][k] *
+                        m2.matrix[k][j];
+                }
+            }
+        }
+        return result;
+}
+
+//scalar multiplication
+Matrix operator*(Matrix& m1, const double scalar){
+    for (int i =0; i<m1.rows; i++){
+        for (int j=0; j< m1.columns; j++){
+            m1.matrix[i][j]*=scalar;
+        }
+    }
+    return m1;
+}
+Matrix operator*(const double scalar, Matrix& m1){
+    for (int i =0; i<m1.rows; i++){
+        for (int j=0; j< m1.columns; j++){
+            m1.matrix[i][j]*=scalar;
+        }
+    }
+    return m1;
+}
 int main() {
-    Matrix m1(3,3);
-    m1.inputMatrix();
    
-    cout<<m1.determinant();
-    Matrix m2(3,3), m3(3,3);
-    m2.inputMatrix();
-    
-    m3 = m1+m2;
-    m3.displayMatrix();
     
     return 0;
 }
