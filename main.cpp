@@ -70,6 +70,7 @@ class Matrix{
         if (m1*m2==m2*m1){
             return true;
         }
+        else {return false; }
     }
 
     //matrix addition, better to keep as non member friend func for symmetry
