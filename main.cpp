@@ -13,7 +13,7 @@ class Matrix{
         cout<<rows<<"x"<<columns<<" matrix"<<endl;
         matrix.resize(rows, vector<double>(columns));
     }
-
+    //functions for inputting and outputting matrix - has been replaced with operator<< and operator>> overloading
     void inputMatrix(){
         for (int i =0 ; i< rows; i++) {
             for (int j=0; j<columns; j++){
@@ -21,20 +21,20 @@ class Matrix{
                 cin>>matrix[i][j];
             }
         }
-        displayMatrix();
     }
     void displayMatrix(){
-        //simply showing how the matrix looks
         for (int i =0 ; i<rows; i++) {
             for (int j=0; j<columns; j++){
-                
                 cout<<matrix[i][j]<<" ";
             }
             cout<<endl;
         }
     }
 
-    
+    //cout and cin for output and input of matrices 
+    friend ostream& operator<<(ostream& os, const Matrix& m1);
+    friend istream& operator>>(istream& is, Matrix& m1);
+
     bool check_if_squareMatrix(){
         //checking if its a square matrix (nxn)
         if (rows==columns){
@@ -72,6 +72,29 @@ class Matrix{
 
 };
 
+//displaying the matrix using operator<< overloading
+ostream& operator<<(ostream& os, const Matrix& m1){
+    
+    for (int i =0 ; i<m1.rows; i++) {
+            for (int j=0; j<m1.columns; j++){
+                
+                 os <<setw(5) << m1.matrix[i][j] << " ";
+            }
+            os<<"\n";
+        }
+    return os;
+}
+//inputting the matrix using operator>> overloading
+istream& operator>>(istream& in, Matrix& m1){
+    for (int i =0 ; i< m1.rows; i++) {
+            for (int j=0; j<m1.columns; j++){
+                cout<<"Enter a["<<i+1<<"]["<<j+1<<"]. "<<endl;
+                in>>m1.matrix[i][j];
+            }
+            
+        }
+        return in;
+}
 
 //matrix addition
 Matrix operator+(const Matrix& o1, const Matrix& o2){
