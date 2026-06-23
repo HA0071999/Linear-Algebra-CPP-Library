@@ -61,6 +61,17 @@ class Matrix{
         return 0;
         //PROBLEM! WILL RETURN 0 IF NOT SQR MATRIX--> needs exception handelling
     }
+
+    //checks if two matrices are equal
+    friend bool operator==(const Matrix& m1, const Matrix& m2);
+
+    //checks if two matrices commute (product of two matrices is independent of the order in which they are multiplied)
+    bool commute(const Matrix& m1, const Matrix& m2){
+        if (m1*m2==m2*m1){
+            return true;
+        }
+    }
+
     //matrix addition, better to keep as non member friend func for symmetry
     friend Matrix  operator+(const Matrix& o1, const Matrix& o2);
     
@@ -73,6 +84,19 @@ class Matrix{
     friend Matrix operator*(const double scalar, Matrix& m1);
 
 };
+
+//returns true if two matrices are equal. Otherwise returns false
+bool operator==(const Matrix& m1, const Matrix& m2){
+    for (int i =0 ; i<m1.rows; i++) {
+            for (int j=0; j<m1.columns; j++){
+                if (m1.matrix[i][j]!=m2.matrix[i][j]){
+                    return false;
+                }
+                 
+            }
+        }
+    return true;
+}
 
 //displaying the matrix using operator<< overloading
 ostream& operator<<(ostream& os, const Matrix& m1){
