@@ -93,7 +93,6 @@ bool operator==(const Matrix& m1, const Matrix& m2){
                 if (m1.matrix[i][j]!=m2.matrix[i][j]){
                     return false;
                 }
-                 
             }
         }
     return true;
@@ -118,9 +117,9 @@ istream& operator>>(istream& in, Matrix& m1){
                 cout<<"Enter a["<<i+1<<"]["<<j+1<<"]. "<<endl;
                 in>>m1.matrix[i][j];
             }
-            
+        cout<<"\n";
         }
-        return in;
+    return in;
 }
 
 //matrix addition
