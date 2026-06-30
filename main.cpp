@@ -74,7 +74,6 @@ class Matrix{
     
                             }
                         }
-    
                     }
                     
                     for (int i=0; i<rows; i++){
@@ -94,10 +93,8 @@ class Matrix{
                             det *= matrix[i][i];
                         return det;
                         }
-        
                 }
             }
-    
         }
         return 0;
         //PROBLEM! WILL RETURN 0 IF NOT SQR MATRIX--> needs exception handelling
@@ -123,7 +120,6 @@ class Matrix{
 
                 }
             }
-
         }
         cout<<"after pivot: " <<endl<<m1;
         
@@ -149,7 +145,6 @@ class Matrix{
             det *= m1.matrix[i][i];
         cout<<"det="<<det;
         return det;
-       
     }
 
     //checks if two matrices are equal
