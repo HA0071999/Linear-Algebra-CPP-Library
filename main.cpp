@@ -54,12 +54,102 @@ class Matrix{
                 return matrix[rows][columns]; break;
                 case 2:
                 //if (2x2) matrix, ad - bc
-                return matrix[0][0]*matrix[1][1] - matrix[1][0]*matrix[0][1];
+                return matrix[0][0]*matrix[1][1] - matrix[1][0]*matrix[0][1]; break;
+                default: 
+                        //Pivitosiation
+                    int sign=1;
+                    for(int i=0; i<rows; i++){
+                        int pivot=i;
+                        for(int j=i+1; j<rows; j++){
+                            if ( fabs(matrix[j][i])>fabs(matrix[pivot][i]) ){
+    
+                                pivot=j; 
+    
+                                if(pivot != i){sign *= -1;}
+                                for(int k=0; k<rows; k++){
+                                    double temp = matrix[i][k];
+                                    matrix[i][k]= matrix[j][k];
+                                    matrix[j][k]=temp;
+                                }
+    
+                            }
+                        }
+    
+                    }
+                    
+                    for (int i=0; i<rows; i++){
+                        for (int k=i+1; k<rows; k++){
+                            if (matrix[i][i]<1e-12){return 0;}
+                            double t= matrix[k][i]/matrix[i][i];
+                            for (int j=i; j<columns; j++){
+                                matrix[k][j]=matrix[k][j]-t*matrix[i][j];
+                            } 
+                        }
+                    }
+                    
+                    
+                    //find the determinant
+                    double det=sign;
+                    for(int i=0;i<rows; i++)
+                            det *= matrix[i][i];
+                        return det;
+                        }
+        
+                }
             }
     
         }
         return 0;
         //PROBLEM! WILL RETURN 0 IF NOT SQR MATRIX--> needs exception handelling
+    }
+
+    //finding the determinant as it's own seperate function
+    double detN(Matrix& m1){
+        //Pivitosiation
+        int sign=1;
+        for(int i=0; i<m1.rows; i++){
+            int pivot=i;
+            for(int j=i+1; j<m1.rows; j++){
+                if ( fabs(m1.matrix[j][i])>fabs(m1.matrix[pivot][i]) ){
+                    //if any elements in the row beloware greater than the row above, swap
+                    pivot=j; 
+
+                    if(pivot != i){sign *= -1;}
+                    for(int k=0; k<m1.rows; k++){
+                        double temp = m1.matrix[i][k];
+                        m1.matrix[i][k]= m1.matrix[j][k];
+                        m1.matrix[j][k]=temp;
+                    }
+
+                }
+            }
+
+        }
+        cout<<"after pivot: " <<endl<<m1;
+        
+        /* Gaussian Eiminataion
+        i: pivot row
+        k: rows below the pivot
+        j: columns in the row being updated*/
+        
+        for (int i=0; i<m1.rows; i++){
+            for (int k=i+1; k<m1.rows; k++){
+                if (m1.matrix[i][i]<1e-12){return 0;}
+                double t= m1.matrix[k][i]/m1.matrix[i][i];
+                for (int j=i; j<m1.columns; j++){
+                    m1.matrix[k][j]=m1.matrix[k][j]-t*m1.matrix[i][j];
+                } //make the elements below the pivot elements equal 0 or eliminate the variables
+            }
+        }
+        cout<<"after gaus"<<endl<<m1;
+        
+        //find the determinant
+        double det=sign;
+        for(int i=0;i<m1.rows; i++)
+            det *= m1.matrix[i][i];
+        cout<<"det="<<det;
+        return det;
+       
     }
 
     //checks if two matrices are equal
