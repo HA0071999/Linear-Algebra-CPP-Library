@@ -12,7 +12,6 @@ class Matrix{
      Matrix(int row, int col){
         rows=row;
         columns=col;
-        cout<<rows<<"x"<<columns<<" matrix"<<endl;
         matrix.resize(rows, vector<double>(columns));
     }
     //functions for inputting and outputting matrix - has been replaced with operator<< and operator>> overloading
@@ -160,7 +159,8 @@ class Matrix{
 
     //matrix addition, better to keep as non member friend func for symmetry
     friend Matrix  operator+(const Matrix& o1, const Matrix& o2);
-    
+    //matrix subtraction
+    friend Matrix operator-(const Matrix& m1, const Matrix& m2);
     //matrix multipliction of two matrices only
     friend Matrix operator*(const Matrix& m1, const Matrix& m2);
 
@@ -220,7 +220,18 @@ Matrix operator+(const Matrix& o1, const Matrix& o2){
         return result;
         
     }
-
+//matrix subraction
+Matrix operator-(const Matrix& m1, const Matrix& m2){
+       Matrix result(m1.rows, m1.columns); //will have same size as m1
+        for (int i = 0; i < m1.rows; i++) {
+            for (int j = 0; j < m1.columns; j++) {
+                result.matrix[i][j] =
+                    m1.matrix[i][j] -
+                    m2.matrix[i][j];
+            }
+        }
+        return result;
+}
 //matrix multiplication
 Matrix operator*(const Matrix& m1, const Matrix& m2){
     Matrix result(m1.rows, m2.columns); 
