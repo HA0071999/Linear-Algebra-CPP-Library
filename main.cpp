@@ -2,6 +2,7 @@
 #include <vector>
 #include <iomanip>
 #include <stdexcept>
+#include <cmath>
 using namespace std;
 
 class Matrix{
