@@ -15,6 +15,12 @@ class Matrix{
         columns=col;
         matrix.resize(rows, vector<double>(columns));
     }
+
+    string size_matrix(){
+        string msize = to_string(rows) + "x" + to_string(columns);
+        return msize;
+    }
+
     //functions for inputting and outputting matrix - has been replaced with operator<< and operator>> overloading
     void inputMatrix(){
         for (int i =0 ; i< rows; i++) {
