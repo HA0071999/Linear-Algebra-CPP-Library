@@ -43,6 +43,14 @@ class Matrix{
     friend ostream& operator<<(ostream& os, const Matrix& m1);
     friend istream& operator>>(istream& is, Matrix& m1);
 
+    //used to access elemnts of a matrix
+    vector<double>& operator[](int row) {
+        return matrix[row];
+    }
+    const vector<double>& operator[](int row) const {
+        return matrix[row];
+    }
+
     bool check_if_squareMatrix(){
         //checking if its a square matrix (nxn)
         if (rows==columns){
