@@ -39,6 +39,12 @@ class Matrix{
         }
     }
 
+    //to create an identity matrix
+    void identity(){
+        for (int i = 0; i < rows; i++)
+            matrix[i][i] = 1;
+    }
+
     //cout and cin for output and input of matrices 
     friend ostream& operator<<(ostream& os, const Matrix& m1);
     friend istream& operator>>(istream& is, Matrix& m1);
