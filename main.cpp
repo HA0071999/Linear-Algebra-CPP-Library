@@ -139,7 +139,7 @@ class Matrix{
                         m1.matrix[j][k]=temp;
                         
                     }
-                    cout<<"Swapped R"<<i+1<<" and row"<<j+1<<endl<<m1<<endl;
+                    cout<<"Swapped R"<<i+1<<" and R"<<j+1<<endl<<m1<<endl;
                 }
             }
         }
