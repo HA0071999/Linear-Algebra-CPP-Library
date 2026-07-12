@@ -169,6 +169,56 @@ class Matrix{
         return det;
     }
 
+    //computing the inverse matrix + DISPLAYING STEPS
+    Matrix inverse(){
+        if (check_if_squareMatrix()==false) {
+            throw logic_error("Inverse only exists when matrix is a square matrix. ");
+        }
+        Matrix m1 = *this;
+        Matrix I(m1.rows, m1.columns); I.identity();
+
+        //partial pivotisation
+        for (int i=0; i< m1.rows; i++){
+            int pivot=i;
+            for (int j = i + 1; j < rows; j++) {
+                if (fabs(m1.matrix[j][i]) > fabs(m1.matrix[pivot][i]))
+                    pivot = j;
+            }
+
+            if (fabs(m1.matrix[pivot][i]) < 1e-12) {
+                throw logic_error("Determinant of matrix is 0. No inverse exists. "); }
+
+            if (pivot != i) {
+                swap(m1.matrix[i], m1.matrix[pivot]);
+                swap(I.matrix[i], I.matrix[pivot]);
+                
+            }
+            //normalize pivot row
+            double pivotValue = m1.matrix[i][i];
+
+            for (int j = 0; j < m1.columns; j++) {
+                m1.matrix[i][j] /= pivotValue;
+                I.matrix[i][j] /= pivotValue;
+            }
+
+            //eliminate every other row
+            for (int k = 0; k < rows; k++) {
+
+                if (k == i) {continue;}
+                double t = m1.matrix[k][i];
+                for (int j = 0; j < columns; j++) {
+                    m1.matrix[k][j] -= t * m1.matrix[i][j];
+                    I.matrix[k][j] -= t * I.matrix[i][j];
+                    cout<<"R"<<k+1<<" = R"<<k+1<<" - "<<t<<"*R"<<i+1<<endl<<m1<<" "<<I<<endl;
+                }
+
+            }
+        }
+        cout<<I<<endl;
+        return I;
+    
+    }
+
     //checks if two matrices are equal
     friend bool operator==(const Matrix& m1, const Matrix& m2);
 
