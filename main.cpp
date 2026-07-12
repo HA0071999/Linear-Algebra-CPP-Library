@@ -120,7 +120,7 @@ class Matrix{
         //PROBLEM! WILL RETURN 0 IF NOT SQR MATRIX--> needs exception handelling
     }
  
-    //finding the determinant as it's own seperate function
+    //finding the determinant as it's own seperate function + AND DISPLAYS STEPS
     double detN(){
         Matrix m1 = *this;
         //Pivitosiation  //if any elements in the row beloware greater than the row above, swap
