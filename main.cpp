@@ -119,33 +119,36 @@ class Matrix{
         return 0;
         //PROBLEM! WILL RETURN 0 IF NOT SQR MATRIX--> needs exception handelling
     }
+ 
     //finding the determinant as it's own seperate function
-    double detN(Matrix& m1){
-        //Pivitosiation
+    double detN(){
+        Matrix m1 = *this;
+        //Pivitosiation  //if any elements in the row beloware greater than the row above, swap
         int sign=1;
         for(int i=0; i<m1.rows; i++){
             int pivot=i;
             for(int j=i+1; j<m1.rows; j++){
                 if ( fabs(m1.matrix[j][i])>fabs(m1.matrix[pivot][i]) ){
-                    //if any elements in the row beloware greater than the row above, swap
                     pivot=j; 
-
+        
                     if(pivot != i){sign *= -1;}
                     for(int k=0; k<m1.rows; k++){
+                        
                         double temp = m1.matrix[i][k];
                         m1.matrix[i][k]= m1.matrix[j][k];
                         m1.matrix[j][k]=temp;
+                        
                     }
-
+                    cout<<"Swapped R"<<i+1<<" and row"<<j+1<<endl<<m1<<endl;
                 }
             }
         }
-        cout<<"after pivot: " <<endl<<m1;
-        
+    
         /* Gaussian Eiminataion
         i: pivot row
         k: rows below the pivot
         j: columns in the row being updated*/
+        //make the elements below the pivot elements equal 0 or eliminate the variables//make the elements below the pivot elements equal 0 or eliminate the variables
         
         for (int i=0; i<m1.rows; i++){
             for (int k=i+1; k<m1.rows; k++){
@@ -153,10 +156,10 @@ class Matrix{
                 double t= m1.matrix[k][i]/m1.matrix[i][i];
                 for (int j=i; j<m1.columns; j++){
                     m1.matrix[k][j]=m1.matrix[k][j]-t*m1.matrix[i][j];
-                } //make the elements below the pivot elements equal 0 or eliminate the variables
+                    cout<<"R"<<k<<" = R"<<k<<" - "<<t<<"R"<<i<<endl<<m1<<endl;
+                } 
             }
         }
-        cout<<"after gaus"<<endl<<m1;
         
         //find the determinant
         double det=sign;
