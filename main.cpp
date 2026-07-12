@@ -156,7 +156,7 @@ class Matrix{
                 double t= m1.matrix[k][i]/m1.matrix[i][i];
                 for (int j=i; j<m1.columns; j++){
                     m1.matrix[k][j]=m1.matrix[k][j]-t*m1.matrix[i][j];
-                    cout<<"R"<<k<<" = R"<<k<<" - "<<t<<"R"<<i<<endl<<m1<<endl;
+                    cout<<"R"<<k+1<<" = R"<<k+1<<" - "<<t<<"*R"<<i+1<<endl<<m1<<endl;
                 } 
             }
         }
