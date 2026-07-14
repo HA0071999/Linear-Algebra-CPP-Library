@@ -66,7 +66,7 @@ class Matrix{
     }
    double determinant(){
         //cannot find determinant if not square matrix
-        if (check_if_squareMatrix()==true){
+        if (check_if_squareMatrix()!=true){ throw logic_error("Cannot compute detrminant of a non-square matrix. "); }
             switch (rows){
                 case 1:
                 //if (1x1) matrix, det is just the entry itself
@@ -115,9 +115,8 @@ class Matrix{
                         return det;
                     }
     
-        }
-        return 0;
-        //PROBLEM! WILL RETURN 0 IF NOT SQR MATRIX--> needs exception handelling
+        
+        
     }
  
     //finding the determinant as it's own seperate function + AND DISPLAYS STEPS
