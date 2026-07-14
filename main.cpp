@@ -338,6 +338,33 @@ Matrix operator*(const double scalar, Matrix& m1){
     }
     return m1;
 }
+
+
+
+
+class LinearSystem {
+    public:
+    int variables;
+    int equations;
+
+    Matrix Coeffients;         //coefficient matrix
+    Matrix Constants;                  //constants matrix
+    //variables = n,  equations = e
+    LinearSystem(int n, int e): variables(n),equations(e), Coeffients(e,n), Constants(e,1) {}
+
+    void input(){
+        cout << "Enter the coefficients:\n";
+        cin >> Coeffients;
+        cout << "Enter the constants:\n";
+        cin >> Constants;
+    }
+    Matrix solve_using_inverse(){
+        if (variables!=equations) {throw logic_error("Must be square matrix. Use solve with Gaussian eliminations ");}
+        return Coeffients.inverse() *Constants;
+    }
+    
+};
+
 int main() {
    
     
