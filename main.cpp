@@ -147,7 +147,7 @@ class Matrix{
         i: pivot row
         k: rows below the pivot
         j: columns in the row being updated*/
-        //make the elements below the pivot elements equal 0 or eliminate the variables//make the elements below the pivot elements equal 0 or eliminate the variables
+        //make the elements below the pivot elements equal 0 or eliminate the variables
         
         for (int i=0; i<m1.rows; i++){
             for (int k=i+1; k<m1.rows; k++){
