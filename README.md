@@ -26,6 +26,8 @@ size_matrix(): string, Returns a string representation of the matrix dimensions 
 
 identity(): void, Transforms the current matrix into an identity matrix.
 
+zero_maatrix(); void, Transforms the current matrix into a zero matrix.
+
 check_if_squareMatrix(): bool, Returns true if the number of rows equals the number of columns.
 
 determinant(): double, Calculates and returns the determinant of a square matrix.
