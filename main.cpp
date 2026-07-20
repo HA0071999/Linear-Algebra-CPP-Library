@@ -362,7 +362,53 @@ class LinearSystem {
         if (variables!=equations) {throw logic_error("Must be square matrix. Use solve with Gaussian eliminations ");}
         return Coeffients.inverse() *Constants;
     }
-    
+
+    Matrix solve_using_gaus(){
+        if (coefficients.rows != constants.rows) {/*throw*/}
+
+        //creating the augmented matrix
+        Matrix aug(coefficients.rows, coefficients.columns+1);
+        for (int i = 0; i < aug.rows; i++){
+                for (int j = 0; j < coefficients.columns; j++)
+                    {aug[i][j] = coefficients[i][j];}
+                aug[i][aug.columns - 1] = constants[i][0];
+            }
+        
+    // Gaussian elimination
+    for (int i = 0; i< aug.rows; i++){
+        // Partial pivoting
+        int pivot = i;
+        for (int j = i; j < aug.columns; j++){
+            if (fabs(aug[j][i]) > fabs(aug[pivot][i]))
+                pivot = j;
+        }
+        if (fabs(aug[pivot][i]) < 1e-12)
+            throw logic_error("System has no unique solution.");
+
+        if (pivot != i)
+            swap(aug.matrix[i], aug.matrix[pivot]);
+
+        // Eliminate rows below
+        for (int k = i + 1; k < aug.rows; k++)
+        {
+            double factor = aug[k][i] / aug[i][i];
+            for (int j = i; j <= aug.columns; j++){
+                aug[k][j] -= factor * aug[i][j];
+            }
+        }
+    }
+     // Back substitution
+    Matrix solution(aug.rows, 1);
+    for (int i = solution.rows - 1; i >= 0; i--){
+        double sum = aug[i][aug.columns-1];
+        for (int j = i + 1; j < coefficients.rows; j++){
+            sum -= aug[i][j] * solution[j][0];
+        }
+        solution[i][0] = sum / aug[i][i];
+    }
+    return solution;
+
+    }
 };
 
 int main() {
