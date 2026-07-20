@@ -348,28 +348,25 @@ Matrix operator*(const double scalar, Matrix& m1){
     return m1;
 }
 
-
-
-
 class LinearSystem {
     public:
     int variables;
     int equations;
 
-    Matrix Coeffients;         //coefficient matrix
-    Matrix Constants;                  //constants matrix
+    Matrix coefficients;         //coefficient matrix
+    Matrix constants;                  //constants matrix
     //variables = n,  equations = e
-    LinearSystem(int n, int e): variables(n),equations(e), Coeffients(e,n), Constants(e,1) {}
+    LinearSystem(int n, int e): variables(n),equations(e), coefficients(e,n), constants(e,1) {}
 
     void input(){
         cout << "Enter the coefficients:\n";
-        cin >> Coeffients;
+        cin >> coefficients;
         cout << "Enter the constants:\n";
-        cin >> Constants;
+        cin >> constants;
     }
     Matrix solve_using_inverse(){
         if (variables!=equations) {throw logic_error("Must be square matrix. Use solve with Gaussian eliminations ");}
-        return Coeffients.inverse() *Constants;
+        return coefficients.inverse() *constants;
     }
 
     Matrix solve_using_gaus(){
@@ -418,6 +415,7 @@ class LinearSystem {
     return solution;
 
     }
+    
 };
 
 int main() {
