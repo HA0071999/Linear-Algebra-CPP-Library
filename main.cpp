@@ -151,6 +151,46 @@ class Matrix{
             }
     }
 
+   //reduced row echelon form 
+   void rref(){
+        gaussian_elimination();
+        // Work backwards through the rows
+        for (int i = rows - 1; i >= 0; i--) {
+
+        // Find pivot in this row
+        int pivotColumn = -1;
+
+        for (int j = 0; j < columns; j++) {
+            if (fabs(matrix[i][j]) > 1e-12) {
+                pivotColumn = j;
+                break;
+            }
+        }
+
+        // Entire row is zero
+        if (pivotColumn == -1) {
+            continue;
+        }
+
+        // Make pivot equal to 1
+        double pivot = matrix[i][pivotColumn];
+
+        for (int j = 0; j < columns; j++) {
+            matrix[i][j] /= pivot;
+        }
+
+        // Eliminate entries ABOVE pivot
+        for (int k = 0; k < i; k++) {
+
+            double factor = matrix[k][pivotColumn];
+
+            for (int j = 0; j < columns; j++) {
+                matrix[k][j] -= factor * matrix[i][j];
+            }
+            }
+        }
+    }
+
    double determinant(){
         //cannot find determinant if not square matrix
         if (isSquare()!=true){ throw logic_error("Cannot compute detrminant of a non-square matrix. "); }
