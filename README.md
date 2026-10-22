@@ -59,6 +59,10 @@ LinearSystem(n, e): Sets up a system with n variables and e equations.
 
 input(): void, Prompts the user to populate the Coefficient and Constant matrices.
 
-solve_using_inverse(): Matrix, Solves the system using $x = A^{-1}B$; requires a square coefficient matrix.
+print(): void, Prints the linear system.
+
+solve_using_inverse(): Matrix, Solves the system using $x = A^{-1}B$; requires a square coefficient matrix. Will throw error if matrix if coefficient matrix is not square.
+
+solve_using_gaus(): Matrix, Solves the sytem using gaussian elimination.
 
 
